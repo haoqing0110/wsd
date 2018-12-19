@@ -1,7 +1,7 @@
 package main
 
 import (
-	"bufio"
+//	"bufio"
 	"crypto/tls"
 	"flag"
 	"fmt"
@@ -120,7 +120,7 @@ func main() {
 		fmt.Printf("connecting to %s from %s...\n", yellow(url), yellow(origin))
 	}
 
-	defer ws.Close()
+	defer ws.Close() // free the resource before function returns, call as stack
 
 	if err != nil {
 		panic(err)
@@ -128,7 +128,7 @@ func main() {
 
 	fmt.Printf("successfully connected to %s\n\n", green(url))
 
-	wg.Add(3)
+/*	wg.Add(3) // wait group, waiting for all goroutines finish.
 
 	errors := make(chan error)
 	in := make(chan []byte)
@@ -152,4 +152,5 @@ func main() {
 	}
 
 	wg.Wait()
+	*/
 }
